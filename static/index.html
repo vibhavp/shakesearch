@@ -1,27 +1,52 @@
 <!doctype html>
-<html class="no-js" lang="">
+<html class="no-js" lang="en">
 
-<head>
-  <meta charset="utf-8">
-  <title>ShakeSearch</title>
-  <link rel="stylesheet" href="style.css">
-  <meta name="theme-color" content="#fafafa">
-</head>
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 
-<body>
-    <p>
-        <form id="form">
-            <label for="query">Query</label>
-            <input type="text" id="query" name="query">
-            <button type="submit">Search</button>
-        </form>
-    </p>
-    <p>
-        <table id="table">
-          <tbody id="table-body"></tbody>
-        </table>
-    </p>
-  <script src="app.js"></script>
-</body>
+    <meta property="og:title" content="">
+    <meta property="og:type" content="">
+    <meta property="og:url" content="">
+    <meta property="og:image" content="">
+
+    <link rel="manifest" href="site.webmanifest">
+    <link rel="apple-touch-icon" href="icon.png">
+    <!-- Place favicon.ico in the root directory -->
+
+    <link rel="stylesheet" href="css/normalize.css">
+    <link rel="stylesheet" href="css/html5-main.css">
+    <link rel="stylesheet" href="css/main.css">
+
+    <meta name="theme-color" content="#fafafa">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- <link rel="stylesheet" href="https://unpkg.com/purecss@2.0.5/build/pure-min.css" -->
+    <!--	  integrity="sha384-LTIDeidl25h2dPxrB2Ekgc9c7sEC3CWGM6HeFmuDNUjX76Ert4Z4IY714dhZHPLd" crossorigin="anonymous"> -->
+  </head>
+
+  <body>
+
+
+    <form id="search-form" >
+      <fieldset>
+	<legend>Shakesearch</legend>
+	<input type="text" name="query">
+	<button type="submit" class="pure-button pure-button-primary">Search</button>
+      </fieldset>
+    </form>
+
+    <div id="results">
+    </div>
+    <template id="results-template">
+      <div id="result" class="result">
+	<h2 class="title">
+	</h2>
+      </div>
+    </template>
+
+    <script src="js/main.js"></script>
+  </body>
 
 </html>

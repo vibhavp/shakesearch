@@ -9,6 +9,9 @@ import (
 	"log"
 	"net/http"
 	"os"
+
+	"pulley.com/shakesearch/api"
+	"pulley.com/shakesearch/parse"
 )
 
 func main() {
@@ -18,10 +21,19 @@ func main() {
 		log.Fatal(err)
 	}
 
+	works, err := parse.GetWorks(searcher.SuffixArray)
+	if err != nil {
+		log.Fatal(err)
+	}
+
 	fs := http.FileServer(http.Dir("./static"))
 	http.Handle("/", fs)
 
-	http.HandleFunc("/search", handleSearch(searcher))
+	log.Println(works)
+	a := &api.API{Works: works}
+
+	// http.HandleFunc("/search", handleSearch(searcher))
+	http.HandleFunc("/search", a.Search)
 
 	port := os.Getenv("PORT")
 	if port == "" {
@@ -69,6 +81,7 @@ func (s *Searcher) Load(filename string) error {
 	}
 	s.CompleteWorks = string(dat)
 	s.SuffixArray = suffixarray.New(dat)
+
 	return nil
 }
 
@@ -76,7 +89,7 @@ func (s *Searcher) Search(query string) []string {
 	idxs := s.SuffixArray.Lookup([]byte(query), -1)
 	results := []string{}
 	for _, idx := range idxs {
-		results = append(results, s.CompleteWorks[idx-250:idx+250])
+		results = append(results, s.CompleteWorks[idx-250:idx+50])
 	}
 	return results
 }
